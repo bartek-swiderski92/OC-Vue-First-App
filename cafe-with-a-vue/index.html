@@ -31,7 +31,7 @@
           <div>
             <label for="add-item-quantity">Quantity:</label>
             <input id="add-item-quantity" type="number" />
-            <button @click="addToShoppingCart">Add to Shopping Cart</button>
+            <button @click="addToShoppingCart(dish.quantity)">Add to Shopping Cart</button>
           </div>
         </div>
       </div>
@@ -103,9 +103,9 @@
         }
       },
       methods: {
-        addToShoppingCart() {
-          // this.quantity++;
-          console.log(this.quantity);
+        addToShoppingCart(amount) {
+          this.quantity = amount++
+          console.log(amount);
         }
       }
     })
