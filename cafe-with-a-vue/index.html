@@ -32,7 +32,7 @@
     </ul>
 
     <footer class="footer">
-      <p>Copyright {{ restaurantName }} 2019</p>
+      <p>{{ copyright }}Copyright {{ restaurantName }} 2019</p>
     </footer>
   </div>
 
@@ -45,6 +45,13 @@
         address: '9274 Beurre Ave, Paris, France',
         phone: '+08 88 88 88 88 88',
         email: 'hello@cafewithavue.bakery',
+      },
+      computed: {
+        copyright() {
+          const currentYear = new Date().getFullYear()
+          copyright: 'dummy'
+        }
+
       }
     })
   </script>
