@@ -30,7 +30,7 @@
           <p v-else>Out of Stock</p>
           <div>
             <label for="add-item-quantity">Quantity: {{ dish.quantity }}</label>
-            <input id="add-item-quantity" type="number" v-model="dish.quantity" />
+            <input id="add-item-quantity" type="number" v-model.number="dish.quantity" />
             <button @click="addToShoppingCart(dish.quantity)">Add to Shopping Cart</button>
           </div>
         </div>
@@ -106,7 +106,6 @@
       methods: {
         addToShoppingCart(amount) {
           this.shoppingCart += amount
-          console.log(this.shoppingCart);
         }
       }
     })
