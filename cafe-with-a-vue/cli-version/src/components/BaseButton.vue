@@ -10,7 +10,7 @@ export default {
   Without it, Vue does not know where to listen
   for the events. -->
   <button v-on="$listeners">
-    <slot></slot>
+    <slot>Add to shopping cart</slot>
   </button>
 </template>
 
