@@ -1,54 +1,55 @@
 <script>
-export default {
-  name: 'MenuItem',
-  props: {
-    addToShoppingCart: {
-      type: Function,
-      required: true
+  export default {
+    name: 'MenuItem',
+    props: {
+      image: {
+        type: Object,
+        required: true
+      },
+      inStock: {
+        type: Boolean,
+        required: true
+      },
+      name: {
+        type: String,
+        required: true
+      },
+      price: {
+        type: Number,
+        required: true
+      },
+      quantity: {
+        type: Number,
+        defaut: 1
+      }
     },
-    image: {
-      type: Object,
-      required: true
+    data() {
+      return {
+        onSale: false
+      }
     },
-    inStock: {
-      type: Boolean,
-      required: true
+    computed: {
+      generatedPrice() {
+        if (this.onSale) {
+          return (this.price * 0.9).toFixed(2)
+        } else {
+          return this.price
+        }
+      }
     },
-    name: {
-      type: String,
-      required: true
+    methods: {
+      updateShoppingCart(quantity) {
+        this.$emit('add-items-to-cart', quantity)
+      },
     },
-    price: {
-      type: Number,
-      required: true
-    },
-    quantity: {
-      type: Number,
-      defaut: 1
-    }
-  },
-  data() {
-    return {
-      onSale: false
-    }
-  },
-  computed: {
-    generatedPrice() {
-      if (this.onSale) {
-        return (this.price * 0.9).toFixed(2)
-      } else {
-        return this.price
+    beforeMount() {
+      const today = new Date().getDate()
+
+      if (today % 2 === 0) {
+        this.onSale = true
       }
     }
-  },
-  beforeMount() {
-    const today = new Date().getDate()
-
-    if (today % 2 === 0) {
-      this.onSale = true
-    }
   }
-}
 </script>
 
 <template>
@@ -62,7 +63,7 @@ export default {
       <div>
         <label for="add-item-quantity">Quantity: {{ quantity }}</label>
         <input v-model.number="quantity" id="add-item-quantity" type="number" />
-        <button @click="addToShoppingCart(quantity)">
+        <button @click="updateShoppingCart(quantity)">
           Add to Shopping Cart
         </button>
       </div>
@@ -71,14 +72,14 @@ export default {
 </template>
 
 <style lang="scss">
-.menu-item {
-  display: flex;
-  width: 500px;
-  justify-content: space-between;
-  margin-bottom: 30px;
+  .menu-item {
+    display: flex;
+    width: 500px;
+    justify-content: space-between;
+    margin-bottom: 30px;
 
-  &__image {
-    max-width: 300px;
+    &__image {
+      max-width: 300px;
+    }
   }
-}
 </style>
